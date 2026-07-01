@@ -34,5 +34,18 @@ services:
     volumes:
       - ./backend:/app
 
+  frontend:
+    build: ./frontend
+    container_name: canchas_frontend
+    depends_on:
+      - backend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://backend:8000
+
 volumes:
   postgres_data:
